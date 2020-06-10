@@ -1,0 +1,206 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Threading;
+
+namespace lesson
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string test;
+            int min = 25001;
+            int max = 25500;
+            int sum = 0;
+            int first = 0;
+            int sum1 = 0;
+            int avg = 0;
+            int sum_of_all = 0;
+            int count_avg = 0;
+            int min_1 = 0;
+            int min_2 = 0;
+            int abs = 0;
+            int avg_e = 0;
+            int sum_e = 0;
+            int count_e = 1;
+            int zh = 1;
+            int sum_z = 0;
+            int count_chet_e = 0;
+            int count_ne_e = 0;
+            int max_chet = 0;
+            int min_nechet = 0;
+            int k_3 = 0;
+
+            Console.WriteLine("Введите n");
+            int n = int.Parse(Console.ReadLine());
+            int[] a = new int[n];
+            for (int i = 0; i < n; i++)
+            {
+                Console.WriteLine("Введите {0}-й элемент", i + 1);
+                a[i] = int.Parse(Console.ReadLine());
+            }
+            // Задание A
+            for (int i = 0; i < n - 1; i++)
+            {
+                for (int k = 1; k < n; k++)
+                {
+                    sum1 = a[i] + a[k];
+                    if (sum1 > sum)
+                    {
+                        sum = sum1;
+                        first = i++;
+                    }
+                }
+            }
+            Console.WriteLine("Сумма");
+            Console.WriteLine(sum);
+            //Задание Б
+            Console.WriteLine("Первый элемент суммы больших соседних чисел");
+            Console.WriteLine(first);
+            //Задание В
+            for (int i = 0; i < n; i++)
+            {
+                sum_of_all = sum_of_all + a[i];
+            }
+            avg = sum_of_all / n;
+            for (int i = 0; i < n; i++)
+            {
+                if (a[i] > avg)
+                {
+                    count_avg = count_avg + 1;
+                }
+            }
+            Console.WriteLine("Количество элементов превышающих среднее арифметическое");
+            Console.WriteLine(count_avg);
+            //Задание г
+            int l = 1;
+            for (int i = 2; i < n; i++)
+            {
+                if (Math.Abs(a[l] - avg) > Math.Abs(a[i] - avg))
+                {
+                    l = i;
+                }
+            }
+            Console.WriteLine("Номер элемента массива наиболее приближенного к среднему арифметическому");
+            Console.WriteLine(l);
+            //Задание Д
+            for (int i = 0; i < n - 1; i++)
+            {
+                for (int k = 1; k < n; k++)
+                {
+                    abs = Math.Abs(a[i] - a[k]);
+                    if (abs < max)
+                    {
+                        min_1 = i;
+                        min_2 = i + 1;
+                        max = abs;
+                    }
+                }
+            }
+            Console.WriteLine("номера двух элементов массива, наименее отличающихся друг от друга");
+            Console.WriteLine(min_1);
+            Console.WriteLine(min_2);
+            //Задание Е
+            for (int i = 0; i < n; i++)
+            {
+                if (a[i] / 100 >= 1 && a[i] / 100 < 10 && a[i] % 2 != 0)
+                {
+                    sum_e = sum_e + a[i];
+                    count_e = count_e + 1;
+                }
+            }
+            avg_e = sum_e / count_e;
+            Console.WriteLine("среднее арифметическое нечётных трехзначных чисел данного массива");
+            Console.WriteLine(avg_e);
+            //Задание ж
+            for (int i = 0; i < n; i++)
+            {
+                if (a[i] % 2 == 0 && a[i] % 10 != 0)
+                {
+                    zh = zh * a[i];
+                }
+            }
+            Console.WriteLine("произведение элементов массива, которые имеют чётное значение и не оканчиваются на 0");
+            Console.WriteLine(zh);
+            //Задание з
+            for (int i = 0; i < n; i++)
+            {
+                if (a[i] > 99)
+                {
+                    if (a[i] < 1000 && a[i] % 100 != 99 && a[i] % 10 == 9)
+                    {
+                        sum_z = sum_z + a[i];
+                    }
+                }
+                if (a[i] < 99 && a[i]%10 == 9)
+                {
+                    sum_z = sum_z + a[i];
+                }
+            }
+            Console.WriteLine("сумма всех содержащихся в массиве трёхзначных чисел, десятичная запись которых оканчивается на 9, но не на 99");
+            Console.WriteLine(sum_z);
+            //Задание И
+            for (int i = 0; i < n; i++)
+            {
+                if(a[i]%2 == 0 )
+                {
+                    count_chet_e = count_chet_e + 1;
+                    if (a[i]>max_chet)
+                    {
+                        max_chet = a[i];
+                    }
+                }
+                else
+                {
+                    count_ne_e = count_ne_e + 1;
+                    if (a[i] > min_nechet)
+                    {
+                        min_nechet = a[i];
+                    }
+                }
+            }
+            if (count_ne_e>count_chet_e)
+            {
+                Console.WriteLine("Нечетных чисел больше.Максимальное нечетное=");
+                Console.WriteLine(min_nechet);
+            }
+            else
+            {
+                Console.WriteLine("Четных чисел больше.Максимальное четное=");
+                Console.WriteLine(max_chet);
+            }
+            //Задание К
+            for (int i = 0; i < n; i++)
+            {
+                if (a[i]>=64 && a[i]<512 && a[i]>k_3)
+                {
+                    k_3 = a[i];
+                }
+            }
+            if (k_3 == 0)
+            {
+                Console.WriteLine("элемент массива, восьмеричная запись которого содержит ровно три цифры не существует");
+            }
+            else
+            {
+                Console.WriteLine("наибольший из элементов массива, восьмеричная запись которого содержит ровно три цифры =");
+                Console.WriteLine(k_3);
+            }
+
+
+
+
+
+                Console.WriteLine("Массив: ");
+            for (int j = 0; j < n; j++)
+            {
+                Console.Write("{0} ", a[j]);
+
+            }
+            Console.ReadLine();
+        }
+    }
+}
