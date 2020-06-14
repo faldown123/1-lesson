@@ -25,7 +25,7 @@ namespace lesson
             int abs = 0;
             int avg_e = 0;
             int sum_e = 0;
-            int count_e = 1;
+            int count_e = 0;
             int zh = 1;
             int sum_z = 0;
             int count_chet_e = 0;
